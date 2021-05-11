@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "102196052-education-and-science-outline-round-vector-illustration.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
