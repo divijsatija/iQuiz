@@ -18,6 +18,14 @@ class ViewController: UIViewController, UITableViewDelegate {
         myTableView.dataSource = myData
         myTableView.delegate = self
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = myTableView.indexPathForSelectedRow{
+            let questions = indexPath.row
+            let questionView = segue.destination as! QuestionsViewController
+            questionView.segmentNumber = questions
+        }
+    }
 
     @IBAction func settingsPopUp(_ sender: Any) {
         let alert = UIAlertController(title: "Settings go here", message: "to be set up", preferredStyle: .alert)
