@@ -131,7 +131,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             }
             dataTask.resume()
         } else {
-            self.showAlertWithMessage(message: "Network Unavailable! Please connect to the Internet.")
+            self.showAlertWithMessage(message: "Network Unavailable! Data loading from local storage.")
             DispatchQueue.global(qos: .userInitiated).async {
                 if myDirectory != nil {
                     let myFilePath = myDirectory?.appendingPathComponent(myFile)
@@ -149,12 +149,10 @@ class ViewController: UIViewController, UITableViewDelegate {
                                 self.myData.myCategory = []
                                 self.myData.myDescription = []
                                 self.myData.quizData = myQuiz
-                            }
-                            for q in myQuiz {
-                                self.myData.myCategory.append(q.title)
-                                self.myData.myDescription.append(q.desc)
-                            }
-                            DispatchQueue.main.async {
+                                for q in myQuiz {
+                                    self.myData.myCategory.append(q.title)
+                                    self.myData.myDescription.append(q.desc)
+                                }
                                 self.myTableView?.reloadData()
                             }
                         } catch {
