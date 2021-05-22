@@ -11,6 +11,7 @@ class FinishedViewController: UIViewController {
     
     public var myScore: Int! = nil
     public var totalQ: Int! = nil
+    public var myURL: String! = nil
     
     @IBOutlet weak var quizAlert: UILabel!
     @IBOutlet weak var quizScore: UILabel!
@@ -31,6 +32,12 @@ class FinishedViewController: UIViewController {
         let myRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipe(_:)))
         myRecognizer.direction = .right
         self.view.addGestureRecognizer(myRecognizer)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ViewController {
+            vc.myData.myURL = myURL
+        }
     }
     
     @IBAction func checkNext(_ sender: UIButton) {

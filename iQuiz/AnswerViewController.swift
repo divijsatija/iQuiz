@@ -16,7 +16,10 @@ class AnswerViewController: UIViewController {
     public var answer: String! = nil
     public var maxSeg: Int! = nil
     public var totalScore: Int! = nil
-    let correctAnswers = [["4", "5"], ["Iron Man"], ["Carbon Dioxide"]]
+    // let correctAnswers = [["4", "5"], ["Iron Man"], ["Carbon Dioxide"]]
+    public var quizData: [Quiz]? = nil
+    public var correctAnswer: String! = nil
+    public var myURL: String! = nil
     
     @IBOutlet weak var myQuestion: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
@@ -27,7 +30,7 @@ class AnswerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        if answer == correctAnswers[segment][questionNumber] {
+        if answer == correctAnswer {
             alertLabel.text = "You chose wisely!"
             totalScore += 1
         } else {
@@ -42,7 +45,7 @@ class AnswerViewController: UIViewController {
         self.view.addGestureRecognizer(recognizerLeft)
         self.view.addGestureRecognizer(recognizerRight)
         
-        rightAnswer.text = "Correct answer was: " + correctAnswers[segment][questionNumber]
+        rightAnswer.text = "Correct answer was: " + correctAnswer
         questionNumber += 1
         myQuestion.text = questionText
     }
@@ -52,10 +55,16 @@ class AnswerViewController: UIViewController {
             vc.segmentNumber = segment
             vc.questionNumber = questionNumber
             vc.totalScore = totalScore
+            vc.myURL = myURL
+            vc.quizData = quizData
         }
         if let vc = segue.destination as? FinishedViewController {
             vc.myScore = totalScore
             vc.totalQ = maxSeg
+            vc.myURL = myURL
+        }
+        if let vc = segue.destination as? ViewController {
+            vc.myData.myURL = myURL
         }
     }
     

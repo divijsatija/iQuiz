@@ -15,17 +15,20 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     public var segmentNumber: Int! = nil
     public var questionNumber: Int! = nil
-    public var currentSegment: [String]! = nil
-    public var currentAnswer: [String]! = nil
+    public var currentSegment: [String]! = []
+    public var currentAnswer: String! = nil
+    public var currentAnswersArr: [String]! = []
     public var selectedAnswer: String! = nil
     public var totalScore: Int! = nil
+    public var myURL: String! = nil
+    public var quizData: [Quiz]! = nil
     
-    let scienceQuestions = ["What is CO2?"]
-    let scienceAnswers = [["Carbon", "Oxygen", "Carbon Monoxide", "Carbon Dioxide"]]
-    let marvelQuestions = ["What is Tony Stark's superhero name?"]
-    let marvelAnswers = [["Captain America", "Iron Man", "Spiderman", "Antman"]]
-    let mathQuestions = ["What is x^2 where x = 2?", "What is 3 + 2?"]
-    let mathAnswers = [["2", "1", "22", "4"], ["32", "5", "4", "6"]]
+//    let scienceQuestions = ["What is CO2?"]
+//    let scienceAnswers = [["Carbon", "Oxygen", "Carbon Monoxide", "Carbon Dioxide"]]
+//    let marvelQuestions = ["What is Tony Stark's superhero name?"]
+//    let marvelAnswers = [["Captain America", "Iron Man", "Spiderman", "Antman"]]
+//    let mathQuestions = ["What is x^2 where x = 2?", "What is 3 + 2?"]
+//    let mathAnswers = [["2", "1", "22", "4"], ["32", "5", "4", "6"]]
     
     @IBOutlet weak var myQuestion: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -45,19 +48,13 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         if totalScore == nil {
             totalScore = 0
         }
-        NSLog(String(segmentNumber))
-        
-        switch segmentNumber {
-        case 1:
-            currentSegment = marvelQuestions
-            currentAnswer = marvelAnswers[questionNumber]
-        case 2:
-            currentSegment = scienceQuestions
-            currentAnswer = scienceAnswers[questionNumber]
-        default:
-            currentSegment = mathQuestions
-            currentAnswer = mathAnswers[questionNumber]
+
+        let currentQuestion = quizData[segmentNumber]
+        for q in currentQuestion.questions {
+            currentSegment.append(q.text)
         }
+        currentAnswer = currentQuestion.questions[questionNumber].answer
+        currentAnswersArr = currentQuestion.questions[questionNumber].answers
         
         myQuestion.text = currentSegment[questionNumber]
         
@@ -68,24 +65,30 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as?  AnswerViewController{
+        if let vc = segue.destination as?  AnswerViewController {
             vc.answer = selectedAnswer
             vc.segment = segmentNumber
             vc.questionNumber = questionNumber
             vc.questionText = currentSegment[questionNumber]
             vc.maxSeg = currentSegment.count
             vc.totalScore = totalScore
+            vc.myURL = myURL
+            vc.quizData = quizData
+            vc.correctAnswer = currentAnswersArr[(Int(currentAnswer) ?? 0) - 1]
+        }
+        if let vc = segue.destination as? ViewController {
+            vc.myData.myURL = myURL
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell: AnswerTableCell = self.tableView.dequeueReusableCell(withIdentifier: "ansStyle") as! AnswerTableCell
-        myCell.ans?.text = currentAnswer[indexPath.row]
+        myCell.ans?.text = currentAnswersArr[indexPath.row]
         return myCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentAnswer.count
+        return currentAnswersArr.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,7 +96,7 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt: IndexPath) {
-        selectedAnswer = currentAnswer[didSelectRowAt.row]
+        selectedAnswer = currentAnswersArr[didSelectRowAt.row]
     }
     
     @IBAction func checkNext(_ sender: UIButton) {

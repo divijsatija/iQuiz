@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C206690F26575FB400F75019 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C206690E26575FB400F75019 /* Reachability.swift */; };
 		C28A3087264B8DD000196FC0 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A3086264B8DD000196FC0 /* QuestionsViewController.swift */; };
 		C28A308A264B8DE700196FC0 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A3089264B8DE700196FC0 /* AnswerViewController.swift */; };
 		C28A308D264B8DF700196FC0 /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A308C264B8DF700196FC0 /* FinishedViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C206690E26575FB400F75019 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C28A3086264B8DD000196FC0 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		C28A3089264B8DE700196FC0 /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 		C28A308C264B8DF700196FC0 /* FinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				C28A308C264B8DF700196FC0 /* FinishedViewController.swift */,
 				C28A3086264B8DD000196FC0 /* QuestionsViewController.swift */,
 				C28A3089264B8DE700196FC0 /* AnswerViewController.swift */,
+				C206690E26575FB400F75019 /* Reachability.swift */,
 				C2F82A5D264A1D000011CB18 /* Assets.xcassets */,
 				C2F82A5F264A1D000011CB18 /* LaunchScreen.storyboard */,
 				C2F82A62264A1D000011CB18 /* Info.plist */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C206690F26575FB400F75019 /* Reachability.swift in Sources */,
 				C28A308D264B8DF700196FC0 /* FinishedViewController.swift in Sources */,
 				C2F82A59264A1CFF0011CB18 /* ViewController.swift in Sources */,
 				C2F82A55264A1CFF0011CB18 /* AppDelegate.swift in Sources */,
